@@ -8,12 +8,12 @@ case "$SVG" in
   *) echo "ROBOT_SVG must be absolute: $SVG" >&2; exit 1 ;;
 esac
 URL="file://$SVG"
+CHROME_FLAGS="--kiosk --noerrdialogs --disable-infobars --check-for-update-interval=31536000"
 
 if command -v cage >/dev/null 2>&1; then
-  exec cage -- chromium --kiosk --noerrdialogs --disable-session-crashed-bubble \
-    --disable-infobars --check-for-update-interval=31536000 "$URL"
+  exec cage -- chromium $CHROME_FLAGS --disable-session-crashed-bubble "$URL"
 fi
-exec chromium --kiosk --noerrdialogs --disable-infobars \
-  --check-for-update-interval=31536000 "$URL" \
-  || exec chromium-browser --kiosk "$URL" \
-  || exec google-chrome-stable --kiosk "$URL"
+
+exec chromium $CHROME_FLAGS "$URL" \
+  || exec chromium-browser $CHROME_FLAGS "$URL" \
+  || exec google-chrome-stable $CHROME_FLAGS "$URL"
