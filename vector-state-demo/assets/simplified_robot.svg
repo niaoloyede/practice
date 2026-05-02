@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768" role="img" aria-label="Simplified robot avatar">
+  <defs>
+    <linearGradient id="body" x1="20%" y1="0%" x2="82%" y2="100%">
+      <stop offset="0%" stop-color="#fff8f8"/>
+      <stop offset="55%" stop-color="#e8dddd"/>
+      <stop offset="100%" stop-color="#bfb7b7"/>
+    </linearGradient>
+    <linearGradient id="head" x1="18%" y1="0%" x2="84%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="48%" stop-color="#eadede"/>
+      <stop offset="100%" stop-color="#bdb5b5"/>
+    </linearGradient>
+    <radialGradient id="head-highlight" cx="62%" cy="24%" r="55%">
+      <stop offset="0%" stop-color="#fffafa" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="neck-red" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#d00000"/>
+      <stop offset="48%" stop-color="#ff0000"/>
+      <stop offset="100%" stop-color="#8f0000"/>
+    </linearGradient>
+    <filter id="soft-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000000" flood-opacity="0.38"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="768" fill="#000000"/>
+
+  <g id="robot" filter="url(#soft-shadow)">
+    <path id="torso" d="M304 768 L304 442 C342 419 386 398 420 376 H604 C638 398 682 419 720 442 L720 768 Z" fill="url(#body)"/>
+    <path id="torso-seam-top" d="M388 448 C440 480 584 480 636 448" fill="none" stroke="#8d8585" stroke-width="2" opacity="0.48"/>
+    <path id="torso-seam-mid" d="M304 610 H720" fill="none" stroke="#111111" stroke-width="3" opacity="0.42"/>
+
+    <g id="shoulders">
+      <circle cx="248" cy="548" r="84" fill="url(#body)"/>
+      <circle cx="776" cy="548" r="84" fill="url(#body)"/>
+      <circle cx="248" cy="548" r="62" fill="#eadfdf" opacity="0.88"/>
+      <circle cx="776" cy="548" r="62" fill="#eadfdf" opacity="0.88"/>
+    </g>
+
+    <g id="arms">
+      <path d="M156 620 L276 620 L260 768 L132 768 Z" fill="url(#body)"/>
+      <path d="M748 620 L868 620 L892 768 L764 768 Z" fill="url(#body)"/>
+      <path d="M150 646 L282 646" stroke="#111111" stroke-width="3" opacity="0.62"/>
+      <path d="M742 646 L874 646" stroke="#111111" stroke-width="3" opacity="0.62"/>
+    </g>
+
+    <path id="neck-band" d="M406 318 H618 C624 358 604 382 574 395 C538 412 486 412 450 395 C420 382 400 358 406 318 Z" fill="url(#neck-red)"/>
+
+    <g id="head">
+      <path d="M392 125 C392 72 432 48 512 48 C592 48 632 72 632 125 V302 C632 366 592 402 512 402 C432 402 392 366 392 302 Z" fill="url(#head)"/>
+      <path d="M392 125 C392 72 432 48 512 48 C592 48 632 72 632 125 V302 C632 366 592 402 512 402 C432 402 392 366 392 302 Z" fill="url(#head-highlight)"/>
+      <circle cx="512" cy="84" r="3" fill="#827a7a" opacity="0.55"/>
+      <path d="M512 48 V66" stroke="#6a6464" stroke-width="1.5" opacity="0.35"/>
+      <path d="M404 120 C402 192 402 260 408 320" stroke="#ffffff" stroke-width="4" opacity="0.35"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Pure SVG + CSS (no JavaScript). Open this file in a browser, or run:
+    python3 server.py
+  and visit http://127.0.0.1:8765/animation.svg
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" width="480" height="480" role="img" aria-label="Orbiting planets around a pulsing sun">
+  <title>Orbiting planets - CSS keyframes inside SVG</title>
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="55%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#312e81"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="45%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#sky)"/>
+
+  <!-- subtle starfield -->
+  <g fill="#e2e8f0" opacity="0.55">
+    <circle cx="42" cy="58" r="1.2"/>
+    <circle cx="120" cy="36" r="0.9"/>
+    <circle cx="380" cy="72" r="1.1"/>
+    <circle cx="420" cy="140" r="0.8"/>
+    <circle cx="90" cy="200" r="1"/>
+    <circle cx="310" cy="28" r="0.85"/>
+    <circle cx="200" cy="400" r="1"/>
+    <circle cx="450" cy="380" r="1.2"/>
+  </g>
+
+  <g transform="translate(240,240)">
+    <circle r="120" fill="url(#sunGlow)" class="pulse-glow"/>
+
+    <g class="orbit orbit-a">
+      <circle r="14" fill="#67e8f9" filter="url(#soft)"/>
+    </g>
+    <g class="orbit orbit-b">
+      <circle r="10" fill="#f472b6" filter="url(#soft)"/>
+    </g>
+    <g class="orbit orbit-c">
+      <circle r="7" fill="#a78bfa" filter="url(#soft)"/>
+    </g>
+
+    <circle r="22" fill="#fbbf24" class="sun-core"/>
+    <circle r="34" fill="#f59e0b" fill-opacity="0.35" class="sun-halo"/>
+  </g>
+
+  <style type="text/css"><![CDATA[
+    .sun-core,
+    .sun-halo,
+    .pulse-glow {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    .sun-core {
+      animation: sun-breathe 2.8s ease-in-out infinite;
+    }
+    .sun-halo {
+      animation: sun-breathe 2.8s ease-in-out infinite reverse;
+    }
+    .pulse-glow {
+      animation: glow-pulse 3.6s ease-in-out infinite;
+    }
+    @keyframes sun-breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.55; transform: scale(0.96); }
+      50% { opacity: 0.95; transform: scale(1.05); }
+    }
+
+    .orbit {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    .orbit-a {
+      animation-name: orbit-spin;
+      animation-duration: 9s;
+    }
+    .orbit-b {
+      animation-name: orbit-spin;
+      animation-duration: 14s;
+      animation-direction: reverse;
+    }
+    .orbit-c {
+      animation-name: orbit-spin;
+      animation-duration: 21s;
+    }
+    @keyframes orbit-spin {
+      from { transform: rotate(0deg) translateX(118px) rotate(0deg); }
+      to { transform: rotate(360deg) translateX(118px) rotate(-360deg); }
+    }
+  ]]></style>
+</svg>
