@@ -1,9 +1,27 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PhotoDetailScreen } from "./PhotoDetailScreen";
-import { FramerMotionTestPage } from "./pages/FramerMotionTestPage";
-import { GsapTestPage } from "./pages/GsapTestPage";
+
+const FramerMotionTestPage = lazy(() =>
+  import("./pages/FramerMotionTestPage").then((module) => ({
+    default: module.FramerMotionTestPage,
+  }))
+);
+const GsapTestPage = lazy(() =>
+  import("./pages/GsapTestPage").then((module) => ({
+    default: module.GsapTestPage,
+  }))
+);
+
+function RouteLoader() {
+  return (
+    <div className="flex min-h-[calc(100dvh-3.5rem)] items-center justify-center px-4 py-8 text-sm text-muted-foreground">
+      Loading demo...
+    </div>
+  );
+}
 
 export default function App() {
   return (
@@ -21,18 +39,20 @@ export default function App() {
           </Button>
         </CardContent>
       </Card>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div className="flex min-h-[calc(100dvh-3.5rem)] items-start justify-center px-4 py-8">
-              <PhotoDetailScreen />
-            </div>
-          }
-        />
-        <Route path="/gsap-tests" element={<GsapTestPage />} />
-        <Route path="/motion-tests" element={<FramerMotionTestPage />} />
-      </Routes>
+      <Suspense fallback={<RouteLoader />}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div className="flex min-h-[calc(100dvh-3.5rem)] items-start justify-center px-4 py-8">
+                <PhotoDetailScreen />
+              </div>
+            }
+          />
+          <Route path="/gsap-tests" element={<GsapTestPage />} />
+          <Route path="/motion-tests" element={<FramerMotionTestPage />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }
