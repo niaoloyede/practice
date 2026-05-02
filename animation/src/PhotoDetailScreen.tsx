@@ -30,7 +30,7 @@ export function PhotoDetailScreen() {
   const heartBgImgRef = useRef<HTMLImageElement>(null);
   const [liked, setLiked] = useState(false);
 
-  useGSAP(
+  const { contextSafe } = useGSAP(
     () => {
       if (!contentRef.current) return;
       gsap.from(contentRef.current, {
@@ -44,7 +44,7 @@ export function PhotoDetailScreen() {
     { scope: rootRef }
   );
 
-  const toggleHeart = () => {
+  const toggleHeart = contextSafe(() => {
     setLiked((v) => !v);
     const bgImg = heartBgImgRef.current;
     if (!bgImg) return;
@@ -64,7 +64,7 @@ export function PhotoDetailScreen() {
       duration: 0.52,
       ease: "elastic.out(1, 0.35)",
     });
-  };
+  });
 
   return (
     <div
